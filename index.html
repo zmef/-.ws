@@ -1,57 +1,40 @@
+<!-- 😜☠🌎.ws - The Last Laugh -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to 😜☠🌎.ws</title>
-    <style>
-        body {
-            margin: 0;
-            background: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .container {
-            position: relative;
-        }
-        .circle {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, cyan, magenta, blue);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            animation: pulse 3s infinite alternate;
-        }
-        
-        @keyframes pulse {
-            from {
-                transform: scale(1);
-                filter: blur(2px);
-            }
-            to {
-                transform: scale(1.2);
-                filter: blur(8px);
-            }
-        }
-        .text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 24px;
-            font-family: 'Arial', sans-serif;
-            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last Laugh 🌎☠😜</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="circle"></div>
-        <div class="text">Welcome to 😜☠🌎.ws</div>
-    </div>
+  <div class="glitch-wrapper">
+    <h1 class="glitch" data-text="THE LAST LAUGH">THE LAST LAUGH</h1>
+    <p>🌎 The world ended. We just kept laughing.</p>
+    <button id="enterBtn">ENTER</button>
+  </div>
+
+  <div id="mainContent" style="display:none">
+    <section class="countdown">
+      <h2>⏳ Time Left Until... Something</h2>
+      <div id="timer"></div>
+      <button onclick="randomizeEndDate()">Pick New Doom Date</button>
+    </section>
+
+    <section class="meme-drop">
+      <h2>😂 Meme Wasteland</h2>
+      <img id="memeImage" src="memes/placeholder.jpg" alt="Random Meme"/>
+      <br>
+      <button onclick="newMeme()">New Meme</button>
+    </section>
+
+    <section class="darkfi">
+      <h2>🌑 Join The Underground</h2>
+      <p>We built another world. Wanna come?</p>
+      <a href="darkfi_teaser.html">Enter DarkFi</a>
+    </section>
+  </div>
+
+<script src="script.js"></script>
 </body>
 </html>
