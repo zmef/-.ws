@@ -50,7 +50,138 @@
 
   <div class="swiper h-full">
     <div class="swiper-wrapper">
-      <!-- Slides unchanged -->
+      <!-- Slide 1: Welcome -->
+      <div class="swiper-slide bg-gradient-to-br from-pink-600 via-purple-800 to-black">
+        <div>
+          <h1 class="text-5xl font-extrabold mb-4">😜☠️🌎</h1>
+          <p class="text-lg">Welcome to Zack’s Memeverse.<br>Swipe to get weird, inspired, or hired.</p>
+        </div>
+      </div>
+
+      <!-- Slide 2: Meme CV -->
+      <div class="swiper-slide bg-gradient-to-r from-amber-700 via-yellow-600 to-red-700">
+        <div class="max-w-xl">
+          <h2 class="text-3xl font-bold mb-4">🧻 Meme Resume</h2>
+          <pre class="text-sm whitespace-pre-wrap text-left">
+██ Zack Fosdyck ██
+✅ Cyber Resilience Gremlin
+🐧 GNU/Linux & FLOSS Fanatic (fight me)
+🔧 Builds stuff. Breaks things.
+🎯 Finds flags. Shares snacks.
+
+TOOLS:
+- 🔍 zsh | 🧠 Zig | 💥 pigz
+- 💀 XOR decoder | 🔒 GitHub Actions
+- 🌱 Regenerative Cyber Doctrine
+          </pre>
+        </div>
+      </div>
+
+      <!-- Slide 3: JS Playground -->
+      <div class="swiper-slide bg-gray-900 flex flex-col items-center justify-center text-green-400 text-xs space-y-4">
+        <pre class="text-left">
+ _____   _____   ______    _______   _____  
+|  __ \ |  __ \ |  ____|  |__   __| |_   _| 
+| |__) || |__) || |__        | |     | |   
+|  ___/ |  _  / |  __|       | |     | |   
+| |     | | \ \ | |____      | |    _| |_  
+|_|     |_|  \_\|______|     |_|   |_____| 
+
+:: Welcome to the fun zone ::
+Try commands like <code>help</code>, <code>joke</code>, or JS expressions.
+        </pre>
+        <div class="w-full max-w-xl text-green-200">
+          <label for="js-input" class="block text-sm text-gray-300 mb-1">🧪 ZackShell</label>
+          <input id="js-input" class="w-full px-2 py-1 bg-black text-green-400 border border-green-700 rounded" placeholder="Type a command like help or 2+2" />
+          <div id="js-output" class="w-full text-left mt-2 bg-black border border-green-800 p-2 h-40 overflow-y-auto"></div>
+        </div>
+        <script>
+          const input = document.getElementById('js-input');
+          const output = document.getElementById('js-output');
+          const commands = {
+            help: () => `Available commands:<br>- help<br>- clear<br>- whoami<br>- ls<br>- joke<br>- quote<br>- ascii<br>- hacktheplanet<br>- credits`,
+            clear: () => { output.innerHTML = ''; return ''; },
+            whoami: () => 'zack@memeverse:~$ badass cyber human',
+            ls: () => 'bin  resume.pdf  zack.sh  /lolcats  /secrets',
+            joke: () => {
+              const jokes = [
+                'Why do programmers hate nature? Too many bugs.',
+                'Why do Java developers wear glasses? Because they don’t see sharp.',
+                'Why was the JavaScript developer sad? Because they didn’t Node how to Express themselves.',
+                'What do you call 8 hobbits? A hobbyte.',
+                'Why do computers always sing? Because they have a Dell.',
+                'There are 10 kinds of people in the world: those who understand binary and those who don’t.',
+                'What’s a computer’s favorite beat? An algo-rhythm.',
+                'Why couldn’t the computer take its hat off? Because it had a bad case of CAPS LOCK.',
+                'Why did the PowerPoint Presentation cross the road? To get to the other slide.',
+                'How do you comfort a JavaScript bug? You console it.',
+                'Why was the function feeling down? It didn’t get called.',
+                'Why do hackers wear hoodies? To stay incognito.',
+                'What’s a programmer’s favorite hangout place? The Foo Bar.',
+                'How do programmers cheer up? By adding a little bit of humor to the console.',
+                'Why don’t robots panic? Because they always keep their processes in check.',
+                'Why did the computer break up with the internet? There was no connection.',
+                'What do you call a group of musical programmers? A string quartet.',
+                'How do you catch a runaway laptop? With a mouse trap.',
+                'Why did the coder get kicked out of school? Because they had too many classes.',
+                'What’s the most musical part of your computer? The disc chord.'
+              ];
+              return jokes[Math.floor(Math.random() * jokes.length)];
+            },
+            quote: () => '"The quieter you become, the more you can hear." – Ram Dass',
+            ascii: () => `┌─────────────┐<br>│ ZackHacks! │<br>└─────────────┘`,
+            hacktheplanet: () => {
+              let message = '>> Initiating system breach...<br>';
+              for (let i = 0; i < 10; i++) {
+                message += '█';
+              }
+              message += '<br>💥 BOOM. Just kidding. Stay in school.';
+              return message;
+            },
+            credits: () => `"Pixel Peeker Polka - faster" by <a href='https://freemusicarchive.org/music/Kevin_MacLeod/contact' class='underline' target='_blank'>Kevin MacLeod</a><br>Licensed under <a href='https://creativecommons.org/licenses/by/3.0/' class='underline' target='_blank'>CC BY 3.0</a>`
+          };
+
+          function handleCommand(inputText) {
+            const cmd = inputText.trim();
+            if (commands[cmd]) {
+              return commands[cmd]();
+            }
+            try {
+              const result = Function("'use strict'; return (" + cmd + ")")();
+              return `<span class='text-yellow-400'>${result}</span>`;
+            } catch (err) {
+              return `<span class='text-red-500'>Error: ${err.message}</span>`;
+            }
+          }
+
+          input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+              const cmd = input.value;
+              const result = handleCommand(cmd);
+              output.innerHTML += `> ${cmd}<br>${result}<br>`;
+              input.value = '';
+              output.scrollTop = output.scrollHeight;
+            }
+          });
+        </script>
+      </div>
+
+      <!-- Slide 4: Chaos -->
+      <div class="swiper-slide bg-black">
+        <div class="text-red-500 animate-pulse text-2xl">
+          ☠️ SYSTEM BREACH ☠️<br />
+          <span class="text-white text-sm">...just kidding. It’s a joke. Probably.</span>
+        </div>
+      </div>
+
+      <!-- Slide 5: Call to Action -->
+      <div class="swiper-slide bg-blue-800">
+        <div>
+          <h2 class="text-3xl font-bold mb-2">Wanna talk?</h2>
+          <p class="mb-4">Slide into my DMs or download a real resume at <br /><code>zackhacks.xyz</code></p>
+          <a href="mailto:zfosdyck@gmail.com" class="underline text-white hover:bg-white hover:text-black px-2 py-1">Email Me</a>
+        </div>
+      </div>
     </div>
   </div>
 
