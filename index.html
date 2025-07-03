@@ -1,40 +1,98 @@
-<!-- 😜☠🌎.ws - The Last Laugh -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Last Laugh 🌎☠😜</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>😜☠️🌎</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
+    .swiper-slide { @apply flex items-center justify-center text-white text-xl px-8 py-12 text-center; }
+  </style>
 </head>
-<body>
-  <div class="glitch-wrapper">
-    <h1 class="glitch" data-text="THE LAST LAUGH">THE LAST LAUGH</h1>
-    <p>🌎 The world ended. We just kept laughing.</p>
-    <button id="enterBtn">ENTER</button>
+<body class="bg-black text-white font-mono">
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop hidden>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Chiptune_Fantasy/Kevin_MacLeod_-_Pixel_Peeker_Polka_-_faster.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="swiper h-full">
+    <div class="swiper-wrapper">
+
+      <!-- Slide 1: Welcome -->
+      <div class="swiper-slide bg-gradient-to-br from-pink-600 via-purple-800 to-black">
+        <div>
+          <h1 class="text-5xl font-extrabold mb-4">😜☠️🌎</h1>
+          <p class="text-lg">Welcome to Zack’s Memeverse.<br>Swipe to get weird, inspired, or hired.</p>
+        </div>
+      </div>
+
+      <!-- Slide 2: Meme CV -->
+      <div class="swiper-slide bg-gradient-to-r from-amber-700 via-yellow-600 to-red-700">
+        <div class="max-w-xl">
+          <h2 class="text-3xl font-bold mb-4">🧻 Meme Resume</h2>
+          <pre class="text-sm whitespace-pre-wrap text-left">
+██ Zack Fosdyck ██
+✅ Cyber Resilience Gremlin
+🐧 Linux Fanatic (fight me)
+🔧 Builds things. Breaks stuff.
+🎯 Finds flags. Shares snacks.
+
+TOOLS:
+- 🔍 Suricata | 🧠 Zig | 💥 tshark
+- 💀 XOR decoder | 🔒 GitHub Actions
+- 🌱 Regenerative Cyber Doctrine
+          </pre>
+        </div>
+      </div>
+
+      <!-- Slide 3: ASCII Playground -->
+      <div class="swiper-slide bg-gray-900">
+        <div class="text-left text-green-400 text-xs">
+          <pre>
+ _____   _____   ______    _______   _____  
+|  __ \ |  __ \ |  ____|  |__   __| |_   _| 
+| |__) || |__) || |__        | |     | |   
+|  ___/ |  _  / |  __|       | |     | |   
+| |     | | \ \ | |____      | |    _| |_  
+|_|     |_|  \_\|______|     |_|   |_____| 
+
+:: Welcome to the fun zone ::
+Type 'nmap -T4 -A zackhacks.xyz' to begin
+          </pre>
+        </div>
+      </div>
+
+      <!-- Slide 4: Chaos Slide -->
+      <div class="swiper-slide bg-black">
+        <div class="text-red-500 animate-pulse text-2xl">
+          ☠️ SYSTEM BREACH ☠️<br />
+          <span class="text-white text-sm">...just kidding. It’s a joke. Probably.</span>
+        </div>
+      </div>
+
+      <!-- Slide 5: CTA -->
+      <div class="swiper-slide bg-blue-800">
+        <div>
+          <h2 class="text-3xl font-bold mb-2">Wanna talk?</h2>
+          <p class="mb-4">Slide into my DMs or download a real resume at <br /><code>zackhacks.xyz</code></p>
+          <a href="mailto:zfosdyck@gmail.com" class="underline text-white hover:bg-white hover:text-black px-2 py-1">Email Me</a>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div id="mainContent" style="display:none">
-    <section class="countdown">
-      <h2>⏳ Time Left Until... Something</h2>
-      <div id="timer"></div>
-      <button onclick="randomizeEndDate()">Pick New Doom Date</button>
-    </section>
-
-    <section class="meme-drop">
-      <h2>😂 Meme Wasteland</h2>
-      <img id="memeImage" src="memes/placeholder.jpg" alt="Random Meme"/>
-      <br>
-      <button onclick="newMeme()">New Meme</button>
-    </section>
-
-    <section class="darkfi">
-      <h2>🌑 Join The Underground</h2>
-      <p>We built another world. Wanna come?</p>
-      <a href="darkfi_teaser.html">Enter DarkFi</a>
-    </section>
-  </div>
-
-<script src="script.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      direction: 'vertical',
+      mousewheel: true,
+      keyboard: { enabled: true },
+      pagination: { el: '.swiper-pagination', clickable: true },
+    });
+  </script>
 </body>
 </html>
