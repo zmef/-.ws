@@ -45,7 +45,7 @@
       "Pixel Peeker Polka - faster" by <a href="https://freemusicarchive.org/music/Kevin_MacLeod/contact" target="_blank" class="underline">Kevin MacLeod</a> is licensed under a <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" class="underline">Creative Commons Attribution License</a>.
     </p>
   </div>
-  <div id="music-icon" class="fixed top-4 right-4 z-40 text-green-400 text-2xl" title="Toggle music">
+  <div id="music-icon" class="fixed top-4 l-4 z-40 text-green-400 text-2xl" title="Toggle music">
     🎵
   </div>
 
@@ -102,6 +102,56 @@ Try commands like <code>help</code>, <code>joke</code>, or JS expressions.
         const input = document.getElementById('js-input');
         const output = document.getElementById('js-output');
         const commands = {
+  ip: async () => {
+    try {
+      const res = await fetch('https://api.ipify.org?format=json');
+      const data = await res.json();
+      return `🌐 Your IP: ${data.ip}`;
+    } catch {
+      return 'Failed to fetch IP.';
+    }
+  },
+  ping: async (cmd) => {
+    const url = cmd.split(' ')[1] || 'https://example.com';
+    try {
+      const start = performance.now();
+      await fetch(url);
+      const end = performance.now();
+      return `✅ Ping to ${url} took ${Math.round(end - start)}ms.`;
+    } catch {
+      return `❌ Ping to ${url} failed.`;
+    }
+  },
+  weather: async () => {
+    try {
+      const res = await fetch('https://wttr.in/Peoria?format=3');
+      const text = await res.text();
+      return `☁️ Weather: ${text}`;
+    } catch {
+      return 'Failed to get weather.';
+    }
+  },
+  news: async () => {
+    try {
+      const res = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story');
+      const data = await res.json();
+      const stories = data.hits.slice(0, 3).map(s => `📰 <a href='${s.url}' target='_blank' class='underline'>${s.title}</a>`);
+      return stories.join('<br>');
+    } catch {
+      return 'Failed to fetch news.';
+    }
+  },
+  cat: async (cmd) => {
+    const url = cmd.split(' ')[1];
+    if (!url) return 'Usage: cat https://example.com';
+    try {
+      const res = await fetch(url);
+      const text = await res.text();
+      return `<pre class='whitespace-pre-wrap'>${text.slice(0, 1000)}</pre>`;
+    } catch {
+      return 'Failed to fetch URL.';
+    }
+  },
   date: () => new Date().toString(),
   echo: (args) => args.slice(5),
   banner: () => `<pre class='text-green-500'>
@@ -154,14 +204,25 @@ Try commands like <code>help</code>, <code>joke</code>, or JS expressions.
           credits: () => `"Pixel Peeker Polka - faster" by <a href='https://freemusicarchive.org/music/Kevin_MacLeod/contact' class='underline' target='_blank'>Kevin MacLeod</a><br>Licensed under <a href='https://creativecommons.org/licenses/by/3.0/' class='underline' target='_blank'>CC BY 3.0</a>`
         };
 
-        function handleCommand(inputText) {
+        async function handleCommand(inputText) {
   const cmd = inputText.trim();
   if (!cmd) return '';
-  const [command, ...args] = cmd.split(" ");
+  const [command] = cmd.split(" ");
   if (commands[command]) {
     try {
-      return typeof commands[command] === 'function' ? commands[command](cmd) : commands[command];
+      const result = await commands[command](cmd);
+      return result;
     } catch (e) {
+      return `<span class='text-red-500'>Command error: ${e.message}</span>`;
+    }
+  }
+  try {
+    const result = Function("'use strict'; return (" + cmd + ")")();
+    return `<span class='text-yellow-400'>${result}</span>`;
+  } catch (err) {
+    return `<span class='text-red-500'>Error: ${err.message}</span>`;
+  }
+} catch (e) {
       return `<span class='text-red-500'>Command error: ${e.message}</span>`;
     }
   }
@@ -180,15 +241,15 @@ Try commands like <code>help</code>, <code>joke</code>, or JS expressions.
           }
         }
 
-        input.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') {
-            const cmd = input.value;
-            const result = handleCommand(cmd);
-            output.innerHTML += `> ${cmd}<br>${result}<br>`;
-            input.value = '';
-            output.scrollTop = output.scrollHeight;
-          }
-        });
+        input.addEventListener('keydown', async function (e) {
+  if (e.key === 'Enter') {
+    const cmd = input.value;
+    const result = await handleCommand(cmd);
+    output.innerHTML += `> ${cmd}<br>${result}<br>`;
+    input.value = '';
+    output.scrollTop = output.scrollHeight;
+  }
+});
       </script>
     </div>
 
